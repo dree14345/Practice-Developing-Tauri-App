@@ -1,0 +1,149 @@
+/* 1. RESET & BASE (The Foundation) */
+:root {
+  --sidebar-width: 260px;
+  --bg-color: #f6f6f6;
+  --sidebar-bg: #ffffff;
+  --accent-color: #396cd8;
+  --border-color: #e5e5e5;
+  --text-main: #0f0f0f;
+  
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  
+  /* Desktop App Polish */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* 2. LAYOUT STRUCTURE */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.3s ease;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.02);
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  background-color: var(--bg-color);
+}
+
+/* 3. COMPONENTS (Buttons, Inputs, Cards) */
+h1 { margin-top: 0; font-weight: 700; }
+h2 { font-size: 0.8rem; text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 15px; }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+input, textarea, button {
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(57, 108, 216, 0.1);
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.item-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.delete-btn {
+  background: #fff0f0;
+  color: #e53e3e;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.delete-btn:hover {
+  background: #e53e3e;
+  color: white;
+}
+
+/* 4. RESPONSIVENESS */
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .main-content {
+    padding: 20px;
+  }
+}
+
+/* 5. DARK MODE (Optional but recommended) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --sidebar-bg: #242424;
+    --border-color: #333;
+    --text-main: #f6f6f6;
+  }
+  .item-card { background: #2a2a2a; }
+  input, textarea { background: #333; color: white; }
+}
