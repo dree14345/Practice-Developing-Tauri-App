@@ -2,6 +2,7 @@ import { useItems, useDeleteItem } from "../../hooks/useItems";
 import { useItemUIStore } from "../../stores/ItemUIStore";
 import { ItemForm } from "../../components/items/ItemForm";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react"; // Optional: npm i lucide-react
+import DashboardLayout from "../../layouts/DashboardLayout";
 
 export function Index() {
   const { data: items, isLoading, isError } = useItems();
@@ -10,21 +11,26 @@ export function Index() {
 
   if (isLoading)
     return (
-      <div className="flex h-64 items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
-      </div>
+      <DashboardLayout>
+        <div className="flex h-64 items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+        </div>
+      </DashboardLayout>
     );
 
   if (isError)
     return (
-      <div className="rounded-lg bg-red-50 p-4 text-red-800 border border-red-200">
-        Failed to load items. Please try again later.
-      </div>
+      <DashboardLayout>
+        <div className="rounded-lg bg-red-50 p-4 text-red-800 border border-red-200">
+          Failed to load items. Please try again later.
+        </div>
+      </DashboardLayout>
     );
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
+    <DashboardLayout>
       {/* Header Section */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
@@ -108,6 +114,6 @@ export function Index() {
       </div>
 
       {isModalOpen && <ItemForm />}
-    </div>
+    </DashboardLayout>
   );
 }

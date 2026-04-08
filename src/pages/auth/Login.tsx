@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { HelpCircle, Moon } from "lucide-react";
 import { SocialLogin } from "../../components/auth/SocialLogin";
 import { LoginHero } from "../../components/auth/LoginHero";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../stores/authStore";
+import useToast from "../../hooks/useToast";
 
 const Login: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const navigate = useNavigate();
+  const { login, isLoading } = useAuthStore();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Your login logic here
+    setError(null);
+    try {
+      await login(username, password);
+      navigate("/dashboard", { replace: true });
+      toast.success("Login Success", `Welcome, "${username}"`);
+    } catch (err: any) {
+      if (err.type === "Unauthorized") {
+        toast.error("Invalid Credentials", "Invalid username or password.");
+      } else {
+        toast.error(
+          "Problem Encountered",
+          "Something went wrong. Please try again.",
+        );
+      }
+    }
   };
 
   return (
@@ -40,7 +64,7 @@ const Login: React.FC = () => {
                 Welcome Back
               </h1>
               <p className="text-slate-500">
-                Sign in to manage your architectural ecosystem.
+                Sign in to login to dree software
               </p>
             </div>
 
@@ -50,14 +74,16 @@ const Login: React.FC = () => {
                   className="block text-slate-600 text-sm font-medium mb-2"
                   htmlFor="email"
                 >
-                  Work Email
+                  Username or Email
                 </label>
                 <input
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-100 focus:ring-2 focus:ring-slate-900/5 focus:bg-white rounded-xl text-slate-900 transition-all outline-none"
                   id="email"
                   placeholder="name@firm.com"
-                  type="email"
+                  type="text"
                   required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
 
@@ -82,6 +108,8 @@ const Login: React.FC = () => {
                   placeholder="••••••••"
                   type="password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
 

@@ -495,8 +495,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c673075a2e0e5f4a1dde27ce9dee1ea4558c7ffe648f576438a20ca1d2acc4b0"
 dependencies = [
  "iana-time-zone",
+ "js-sys",
  "num-traits",
  "serde",
+ "wasm-bindgen",
  "windows-link 0.2.1",
 ]
 
@@ -653,6 +655,7 @@ name = "crudtauriapp"
 version = "0.1.0"
 dependencies = [
  "bcrypt",
+ "chrono",
  "dotenv",
  "jsonwebtoken",
  "serde",
@@ -661,6 +664,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-opener",
+ "thiserror 2.0.18",
  "tokio",
 ]
 
@@ -4038,6 +4042,7 @@ dependencies = [
  "sha2",
  "smallvec",
  "thiserror 2.0.18",
+ "time",
  "tokio",
  "tokio-stream",
  "tracing",
@@ -4120,6 +4125,7 @@ dependencies = [
  "sqlx-core",
  "stringprep",
  "thiserror 2.0.18",
+ "time",
  "tracing",
  "whoami",
 ]
@@ -4157,6 +4163,7 @@ dependencies = [
  "sqlx-core",
  "stringprep",
  "thiserror 2.0.18",
+ "time",
  "tracing",
  "whoami",
 ]
@@ -4181,6 +4188,7 @@ dependencies = [
  "serde_urlencoded",
  "sqlx-core",
  "thiserror 2.0.18",
+ "time",
  "tracing",
  "url",
 ]

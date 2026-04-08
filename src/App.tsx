@@ -3,7 +3,8 @@ import { Index } from "./pages/items/Index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./pages/auth/Login";
 import { AuthGuard } from "./components/AuthGuard";
-import DashboardLayout from "./layouts/DashboardLayout";
+import Dashboard from "./pages/Dashboard";
+import { ToastContainer } from "./components/ui/ToastContainer";
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -11,21 +12,17 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          {/* 1. The "Default" Redirect */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
-          {/* 2. Public Route */}
           <Route path="/login" element={<Login />} />
-
-          {/* 3. Protected Routes */}
-          <Route element={<AuthGuard />}>
-            {/* Renders your sidebar/topbar/bento-grid structure */}
-            <Route path="/dashboard" element={<DashboardLayout />} />
-          </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/items" element={<Index />} />
+          {/* <Route element={<AuthGuard />}></Route> */}
 
           {/* 4. Catch-all for 404s */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </QueryClientProvider>
   );
